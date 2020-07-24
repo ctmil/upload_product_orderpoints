@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="product_upload_orderpoints_view_form">
+		<field name="name">product.upload.orderpoints.view.form</field>
+		<field name="model">product.upload.orderpoints</field>
+		<field name="arch" type="xml">
+			<form string="Archivo de Puntos de Pedidos">
+				<header>
+					<button name="btn_process" type="object" string="Procesar" states="draft" />
+					<field name="state" widget="statusbar" />
+				</header>
+				<sheet>
+					<group>
+						<field name="name" />
+						<field name="product_file" widget="binary"/>
+						<field name="delimiter" />
+					</group>
+					<notebook>
+						<page string="Contenidos" >
+							<field name="file_content" readonly="1"/>
+						</page>
+						<page string="No procesados">
+							<field name="not_processed_content" readonly="1"/>
+						</page>
+						<page string="Reglas de Abastecimiento">
+							<field name="order_point_ids" readonly="1"/>
+						</page>
+						<page string="Proveedores">
+							<field name="supplierinfo_ids" readonly="1"/>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="product_upload_orderpoints_tree">
+		<field name="name">product.upload.orderpoints.view.tree</field>
+		<field name="model">product.upload.orderpoints</field>
+		<field name="arch" type="xml">
+		<tree string="Planta">
+			<field name="name" />
+			<field name="product_file" />
+			<field name="state" />
+		</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_product_upload_orderpoints">
+		<field name="name">Actualizar Puntos de Pedido</field>
+		<field name="res_model">product.upload.orderpoints</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+	<menuitem name="Archivos Puntos de Pedido" id="product_upload_orderpoints_menu"
+		parent="sale.product_menu_catalog"
+		action="action_product_upload_orderpoints"
+		sequence="100"/>
+
+</odoo>
